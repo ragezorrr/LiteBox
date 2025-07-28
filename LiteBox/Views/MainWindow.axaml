@@ -1,0 +1,346 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:LiteBoxOptimizer.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:i="https://github.com/avaloniaui/avalonia.xaml.interactions"
+        xmlns:ia="https://github.com/avaloniaui/avalonia.xaml.interactions/api"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
+        x:Class="LiteBoxOptimizer.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/lite-box-logo.png"
+        Title="LiteBox"
+        MinWidth="1000"
+        MinHeight="700"
+        WindowStartupLocation="CenterScreen">
+
+    <Design.DataContext>
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Window.Styles>
+        <Style Selector="Button.CategoryCard">
+            <Setter Property="Background" Value="#2A2A2A"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Padding" Value="16"/>
+            <Setter Property="Margin" Value="8"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        
+        <Style Selector="Button.CategoryCard:pointerover">
+            <Setter Property="Background" Value="#333333"/>
+        </Style>
+        
+        <Style Selector="Border.OptimizationCard">
+            <Setter Property="Background" Value="#1E1E1E"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="12"/>
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="BorderBrush" Value="#404040"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        
+        <Style Selector="Border.OptimizationCard:pointerover">
+            <Setter Property="BorderBrush" Value="#0078D4"/>
+        </Style>
+        
+        <Style Selector="TextBlock.CategoryTitle">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        
+        <Style Selector="TextBlock.CategoryDescription">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="#B0B0B0"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        
+        <Style Selector="TextBlock.OptimizationTitle">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+        
+        <Style Selector="TextBlock.OptimizationDescription">
+            <Setter Property="FontSize" Value="11"/>
+            <Setter Property="Foreground" Value="#A0A0A0"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+        
+        <Style Selector="Button.ApplyButton">
+            <Setter Property="Background" Value="#0078D4"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="16,8"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+        </Style>
+        
+        <Style Selector="Button.ApplyButton:pointerover">
+            <Setter Property="Background" Value="#106EBE"/>
+        </Style>
+        
+        <Style Selector="Button.AppliedButton">
+            <Setter Property="Background" Value="#107C10"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="CornerRadius" Value="6"/>
+            <Setter Property="Padding" Value="16,8"/>
+        </Style>
+        
+        <!-- Custom Toggle Switch -->
+        <Style Selector="ToggleButton.CustomSwitch">
+            <Setter Property="Width" Value="44"/>
+            <Setter Property="Height" Value="24"/>
+            <Setter Property="Background" Value="#3A3A3A"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="CornerRadius" Value="12"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Name="PART_Border"
+                           Background="{TemplateBinding Background}" 
+                           CornerRadius="{TemplateBinding CornerRadius}"
+                           BorderThickness="{TemplateBinding BorderThickness}"
+                           BorderBrush="{TemplateBinding BorderBrush}">
+                        <Grid>
+                            <Border Name="PART_Track"
+                                   Background="Transparent"
+                                   CornerRadius="12"/>
+                            <Canvas>
+                                <Border Name="PART_Thumb"
+                                       Width="20"
+                                       Height="20"
+                                       Background="White"
+                                       CornerRadius="10"
+                                       Canvas.Left="2"
+                                       Canvas.Top="2"
+                                       BoxShadow="0 1 3 0 #40000000">
+                                    <Border.Transitions>
+                                        <Transitions>
+                                            <DoubleTransition Property="Canvas.Left" Duration="0:0:0.25" Easing="CubicEaseOut"/>
+                                        </Transitions>
+                                    </Border.Transitions>
+                                </Border>
+                            </Canvas>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </Style>
+        
+        <!-- Unchecked State -->
+        <Style Selector="ToggleButton.CustomSwitch:not(:checked)">
+            <Setter Property="Background" Value="#3A3A3A"/>
+        </Style>
+        
+        <Style Selector="ToggleButton.CustomSwitch:not(:checked) /template/ Border#PART_Thumb">
+            <Setter Property="Canvas.Left" Value="2"/>
+            <Setter Property="Background" Value="#E0E0E0"/>
+        </Style>
+        
+        <!-- Checked State -->
+        <Style Selector="ToggleButton.CustomSwitch:checked">
+            <Setter Property="Background" Value="#007ACC"/>
+        </Style>
+        
+        <Style Selector="ToggleButton.CustomSwitch:checked /template/ Border#PART_Thumb">
+            <Setter Property="Canvas.Left" Value="22"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        
+        <!-- Hover States -->
+        <Style Selector="ToggleButton.CustomSwitch:not(:checked):pointerover">
+            <Setter Property="Background" Value="#4A4A4A"/>
+        </Style>
+        
+        <Style Selector="ToggleButton.CustomSwitch:checked:pointerover">
+            <Setter Property="Background" Value="#1E88E5"/>
+        </Style>
+        
+        <!-- Pressed States -->
+        <Style Selector="ToggleButton.CustomSwitch:not(:checked):pressed">
+            <Setter Property="Background" Value="#2A2A2A"/>
+        </Style>
+        
+        <Style Selector="ToggleButton.CustomSwitch:checked:pressed">
+            <Setter Property="Background" Value="#0D47A1"/>
+        </Style>
+        
+        <!-- Disabled State -->
+        <Style Selector="ToggleButton.CustomSwitch:disabled">
+            <Setter Property="Opacity" Value="0.5"/>
+            <Setter Property="Cursor" Value="Arrow"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid Background="#1A1A1A">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Header -->
+        <Border Grid.ColumnSpan="2" 
+                Background="#252525" 
+                Height="80" 
+                VerticalAlignment="Top"
+                BoxShadow="0 2 8 0 #1A000000">
+            <StackPanel Orientation="Horizontal" 
+                       VerticalAlignment="Center" 
+                       Margin="32,0">
+                <Image Source="/Assets/lite-box-logo.png" 
+                       Width="64" 
+                       Height="64" 
+                       VerticalAlignment="Center"/>
+                <StackPanel Margin="16,0,0,0" VerticalAlignment="Center">
+                    <TextBlock Text="LiteBox" 
+                              FontSize="24" 
+                              FontWeight="Bold" 
+                              Foreground="White"/>
+                    <TextBlock Text="Windows 11 Optimization Tool" 
+                              FontSize="12" 
+                              Foreground="#B0B0B0"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- Categories Panel -->
+        <Border Grid.Column="0" 
+                Background="#1F1F1F" 
+                Margin="0,80,0,0"
+                BorderBrush="#333333" 
+                BorderThickness="0,0,1,0">
+            <ScrollViewer Padding="16,16,16,16">
+                <ItemsControl ItemsSource="{Binding Categories}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Button Classes="CategoryCard" 
+                                   Cursor="Hand"
+                                   Background="Transparent"
+                                   BorderThickness="0"
+                                   Command="{Binding $parent[Window].DataContext.SelectCategoryCommand}"
+                                   CommandParameter="{Binding}">
+                                <StackPanel>
+                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
+                                        <TextBlock Text="{Binding Icon}" 
+                                                  FontSize="20" 
+                                                  VerticalAlignment="Center"/>
+                                        <TextBlock Text="{Binding Name}" 
+                                                  Classes="CategoryTitle"
+                                                  Margin="12,0,0,0"
+                                                  VerticalAlignment="Center"/>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding Description}" 
+                                              Classes="CategoryDescription"/>
+                                    <TextBlock Text="{Binding Items.Count}" 
+                                              FontSize="10" 
+                                              Foreground="#808080" 
+                                              Margin="0,4,0,0"/>
+                                </StackPanel>
+                            </Button>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Border>
+
+        <!-- Optimizations Panel -->
+        <Border Grid.Column="1" 
+                Background="#1A1A1A" 
+                Margin="0,80,0,0">
+            <Grid>
+                <ScrollViewer Padding="24,16,24,16" 
+                             IsVisible="{Binding SelectedCategory, Converter={x:Static ObjectConverters.IsNotNull}}">
+                    <StackPanel>
+                        <!-- Category Header -->
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,24">
+                            <TextBlock Text="{Binding SelectedCategory.Icon}" 
+                                      FontSize="32" 
+                                      VerticalAlignment="Center"/>
+                            <StackPanel Margin="16,0,0,0" VerticalAlignment="Center">
+                                <TextBlock Text="{Binding SelectedCategory.Name}" 
+                                          FontSize="28" 
+                                          FontWeight="Bold" 
+                                          Foreground="White"/>
+                                <TextBlock Text="{Binding SelectedCategory.Description}" 
+                                          FontSize="14" 
+                                          Foreground="#B0B0B0"/>
+                            </StackPanel>
+                        </StackPanel>
+
+                        <!-- Optimizations List -->
+                        <ItemsControl ItemsSource="{Binding SelectedCategory.Items}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Classes="OptimizationCard" Margin="0,0,0,12">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+                                            <StackPanel Grid.Column="0">
+                                                <TextBlock Text="{Binding Name}" 
+                                                          Classes="OptimizationTitle" 
+                                                          Margin="0,0,0,4"/>
+                                                <TextBlock Text="{Binding Description}" 
+                                                          Classes="OptimizationDescription"/>
+                                                <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                                                    <Border Background="#333333" 
+                                                           CornerRadius="4" 
+                                                           Padding="6,2">
+                                                        <TextBlock Text="{Binding Type}" 
+                                                                  FontSize="10" 
+                                                                  Foreground="#CCCCCC"/>
+                                                    </Border>
+                                                    <Border Background="#4A4A00" 
+                                                           CornerRadius="4" 
+                                                           Padding="6,2" 
+                                                           Margin="8,0,0,0"
+                                                           IsVisible="{Binding RequiresAdmin}">
+                                                        <TextBlock Text="Требует админ права" 
+                                                                  FontSize="10" 
+                                                                  Foreground="#FFFF00"/>
+                                                    </Border>
+                                                </StackPanel>
+                                            </StackPanel>
+
+                                            <ToggleButton Grid.Column="1"
+                                                         Classes="CustomSwitch"
+                                                         IsChecked="{Binding IsApplied, Mode=TwoWay}"
+                                                         VerticalAlignment="Center"
+                                                         HorizontalAlignment="Right"
+                                                         Margin="0,0,8,0"/>
+                                        </Grid>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+
+                <!-- Welcome Screen -->
+                <StackPanel VerticalAlignment="Center" 
+                           HorizontalAlignment="Center"
+                           IsVisible="{Binding SelectedCategory, Converter={x:Static ObjectConverters.IsNull}}">
+                    <TextBlock Text="🚀" 
+                              FontSize="64" 
+                              HorizontalAlignment="Center" 
+                              Margin="0,0,0,16"/>
+                    <TextBlock Text="Добро пожаловать в LiteBox Optimizer!" 
+                              FontSize="24" 
+                              FontWeight="Bold" 
+                              Foreground="White" 
+                              HorizontalAlignment="Center"/>
+                    <TextBlock Text="Выберите категорию оптимизации слева для начала работы" 
+                              FontSize="14" 
+                              Foreground="#B0B0B0" 
+                              HorizontalAlignment="Center" 
+                              Margin="0,8,0,0"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</Window>
