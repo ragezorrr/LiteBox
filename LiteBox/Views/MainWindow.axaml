@@ -10,8 +10,8 @@
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/lite-box-logo.png"
         Title="LiteBox"
-        MinWidth="1000"
-        MinHeight="700"
+        MinWidth="900"
+        MinHeight="650"
         WindowStartupLocation="CenterScreen">
 
     <Design.DataContext>
@@ -21,9 +21,9 @@
     <Window.Styles>
         <Style Selector="Button.CategoryCard">
             <Setter Property="Background" Value="#2A2A2A"/>
-            <Setter Property="CornerRadius" Value="12"/>
-            <Setter Property="Padding" Value="16"/>
-            <Setter Property="Margin" Value="8"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="16,12"/>
+            <Setter Property="Margin" Value="4,2"/>
             <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
             <Setter Property="BorderThickness" Value="0"/>
         </Style>
@@ -46,15 +46,9 @@
         </Style>
         
         <Style Selector="TextBlock.CategoryTitle">
-            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Foreground" Value="White"/>
-        </Style>
-        
-        <Style Selector="TextBlock.CategoryDescription">
-            <Setter Property="FontSize" Value="12"/>
-            <Setter Property="Foreground" Value="#B0B0B0"/>
-            <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
         
         <Style Selector="TextBlock.OptimizationTitle">
@@ -177,30 +171,30 @@
 
     <Grid Background="#1A1A1A">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="240"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
         <!-- Header -->
         <Border Grid.ColumnSpan="2" 
                 Background="#252525" 
-                Height="80" 
+                Height="70" 
                 VerticalAlignment="Top"
                 BoxShadow="0 2 8 0 #1A000000">
             <StackPanel Orientation="Horizontal" 
                        VerticalAlignment="Center" 
-                       Margin="32,0">
+                       Margin="24,0">
                 <Image Source="/Assets/lite-box-logo.png" 
-                       Width="64" 
-                       Height="64" 
+                       Width="48" 
+                       Height="48" 
                        VerticalAlignment="Center"/>
-                <StackPanel Margin="16,0,0,0" VerticalAlignment="Center">
+                <StackPanel Margin="12,0,0,0" VerticalAlignment="Center">
                     <TextBlock Text="LiteBox" 
-                              FontSize="24" 
+                              FontSize="20" 
                               FontWeight="Bold" 
                               Foreground="White"/>
                     <TextBlock Text="Windows 11 Optimization Tool" 
-                              FontSize="12" 
+                              FontSize="11" 
                               Foreground="#B0B0B0"/>
                 </StackPanel>
             </StackPanel>
@@ -209,10 +203,10 @@
         <!-- Categories Panel -->
         <Border Grid.Column="0" 
                 Background="#1F1F1F" 
-                Margin="0,80,0,0"
+                Margin="0,70,0,0"
                 BorderBrush="#333333" 
                 BorderThickness="0,0,1,0">
-            <ScrollViewer Padding="16,16,16,16">
+            <ScrollViewer Padding="12,12,12,12">
                 <ItemsControl ItemsSource="{Binding Categories}">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
@@ -222,22 +216,14 @@
                                    BorderThickness="0"
                                    Command="{Binding $parent[Window].DataContext.SelectCategoryCommand}"
                                    CommandParameter="{Binding}">
-                                <StackPanel>
-                                    <StackPanel Orientation="Horizontal" Margin="0,0,0,8">
-                                        <TextBlock Text="{Binding Icon}" 
-                                                  FontSize="20" 
-                                                  VerticalAlignment="Center"/>
-                                        <TextBlock Text="{Binding Name}" 
-                                                  Classes="CategoryTitle"
-                                                  Margin="12,0,0,0"
-                                                  VerticalAlignment="Center"/>
-                                    </StackPanel>
-                                    <TextBlock Text="{Binding Description}" 
-                                              Classes="CategoryDescription"/>
-                                    <TextBlock Text="{Binding Items.Count}" 
-                                              FontSize="10" 
-                                              Foreground="#808080" 
-                                              Margin="0,4,0,0"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Icon}" 
+                                              FontSize="18" 
+                                              VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding Name}" 
+                                              Classes="CategoryTitle"
+                                              Margin="10,0,0,0"
+                                              VerticalAlignment="Center"/>
                                 </StackPanel>
                             </Button>
                         </DataTemplate>
@@ -249,7 +235,7 @@
         <!-- Optimizations Panel -->
         <Border Grid.Column="1" 
                 Background="#1A1A1A" 
-                Margin="0,80,0,0">
+                Margin="0,70,0,0">
             <Grid>
                 <ScrollViewer Padding="24,16,24,16" 
                              IsVisible="{Binding SelectedCategory, Converter={x:Static ObjectConverters.IsNotNull}}">

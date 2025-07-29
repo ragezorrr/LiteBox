@@ -10,11 +10,13 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("LiteBoxOptimizer")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("LiteBox")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
+[assembly: System.Reflection.AssemblyCopyrightAttribute("© 2025 LiteBox. All rights reserved.")]
+[assembly: System.Reflection.AssemblyDescriptionAttribute("Windows 11 optimization tool with modern UI")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("LiteBoxOptimizer")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3a74a5676def34c6c32556ce2625ec7221d39374")]
+[assembly: System.Reflection.AssemblyProductAttribute("LiteBox Optimizer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LiteBoxOptimizer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
